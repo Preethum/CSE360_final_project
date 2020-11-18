@@ -5,7 +5,7 @@ public class Project{
     public static void main (String[] args){
         
         
-        gui gui_int = new gui();
+        GUI gui_int = new GUI();
         gui_int.Model();
         
         
