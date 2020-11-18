@@ -23,7 +23,7 @@ public class GUI{
         mb.add(menu2);  
 
         f.setJMenuBar(mb);  
-        f.setSize(400,400);  
+        f.setSize(1600,800);  
         f.setLayout(null);  
         f.setVisible(true);  
 
