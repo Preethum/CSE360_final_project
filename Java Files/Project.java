@@ -1,6 +1,13 @@
 //Main file to handle user interaction
+  
 public class Project{
+    
     public static void main (String[] args){
-        //TO BE IMPLEMENTED
+        
+        
+        gui gui_int = new gui();
+        gui_int.Model();
+        
+        
     }
 }
