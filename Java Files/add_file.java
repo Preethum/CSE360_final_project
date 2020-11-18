@@ -1,6 +1,4 @@
-// Add file tab on the UI
-public class add_file{
-
-
-    
+// Add Attendace function under File tab
+public class AddFile{
+    //TO BE IMPLEMENTED
 }

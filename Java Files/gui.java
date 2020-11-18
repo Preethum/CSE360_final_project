@@ -1,7 +1,5 @@
-// All Elements inside teh user Interface 
+// Used for the Graphical User Interface
 
-public class gui{
-
-
-    
+public class GUI{
+    //TO BE IMPLEMENTED
 }
