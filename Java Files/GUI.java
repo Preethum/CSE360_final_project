@@ -1,31 +1,24 @@
 // Used for the Graphical User Interface
+import java.util.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.GridBagLayout;
-
-
 
 public class GUI implements ActionListener  {
     JMenu menu1;
     JButton menu2;  
     JMenuItem i1, i2, i3, i4;  
     public void Model() {
-        
-         
         JFrame f= new JFrame("CSE360 Final Project");  
         JMenuBar mb=new JMenuBar();  
         menu1=new JMenu("File");   
+        menu2 = new JButton("About");
 
         i1=new JMenuItem("Load a Roster");
         i2=new JMenuItem("Add Attendance");  
         i3=new JMenuItem("Save");  
         i4=new JMenuItem("Plot Data"); 
-
-        
-        
-        menu2 = new JButton("About");
-     
+         
         menu1.add(i1);
         menu1.add(i2); 
         menu1.add(i3);  
@@ -39,24 +32,22 @@ public class GUI implements ActionListener  {
         i4.addActionListener(this);
         menu2.addActionListener(this);
 
-        
         f.setJMenuBar(mb);  
-        f.setSize(400,400);  
+        f.setSize(1000,600);  
         f.setLayout(null);  
         f.setVisible(true);
-
-        
-
-        
-        
-    }
+        }
 
     public void actionPerformed(ActionEvent e){  
         if(e.getSource()==i1){
             System.out.println("Load a Roster");
-            
-            Roster ros = new Roster();
-            ros.openFileChooser();
+            String path = Roster.openFileChooser(); //open a file chooser and save the selected file's path to path
+            ArrayList<Student> studentArr = new ArrayList<Student>();   //create array list of students
+            studentArr = Roster.parseFile(path);    //fill studentArr using parseFile function in Roster.java
+            /**
+             * TODO:
+             * ADD STUDENTS INTO JTABLE
+             **/
         }
 
         else if(e.getSource()==i2){
@@ -80,20 +71,12 @@ public class GUI implements ActionListener  {
             
             JPanel panel = new JPanel();
             
-            
             panel.add(lblFName);
             // panel.add(lblFName1);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(500, 70);
             frame.getContentPane().add(panel);
             frame.setVisible(true);
         }
-
     }
-    
-    
-   
-    
-    
 }
-
