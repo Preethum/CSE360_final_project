@@ -5,49 +5,66 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GUI implements ActionListener  {
-    JMenu menu1;
-    JButton menu2;  
+    JFrame f;
+    JMenu fileMenu;
+    JButton aboutButton;  
     JMenuItem i1, i2, i3, i4;  
+
     public void Model() {
-        JFrame f= new JFrame("CSE360 Final Project");  
+        f = new JFrame("CSE360 Final Project");
         JMenuBar mb=new JMenuBar();  
-        menu1=new JMenu("File");   
-        menu2 = new JButton("About");
+        fileMenu=new JMenu("File");   
+        aboutButton = new JButton("About");
 
         i1=new JMenuItem("Load a Roster");
         i2=new JMenuItem("Add Attendance");  
         i3=new JMenuItem("Save");  
         i4=new JMenuItem("Plot Data"); 
          
-        menu1.add(i1);
-        menu1.add(i2); 
-        menu1.add(i3);  
-        menu1.add(i4); 
-        mb.add(menu1);
-        mb.add(menu2);  
+        fileMenu.add(i1);
+        fileMenu.add(i2); 
+        fileMenu.add(i3);  
+        fileMenu.add(i4); 
+        mb.add(fileMenu);
+        mb.add(aboutButton);  
 
         i1.addActionListener(this);
         i2.addActionListener(this);
         i3.addActionListener(this);
         i4.addActionListener(this);
-        menu2.addActionListener(this);
+        aboutButton.addActionListener(this);
 
         f.setJMenuBar(mb);  
         f.setSize(1000,600);  
         f.setLayout(null);  
         f.setVisible(true);
+        f.setLocationRelativeTo(null);
         }
 
     public void actionPerformed(ActionEvent e){  
         if(e.getSource()==i1){
             System.out.println("Load a Roster");
             String path = Roster.openFileChooser(); //open a file chooser and save the selected file's path to path
-            ArrayList<Student> studentArr = new ArrayList<Student>();   //create array list of students
+            ArrayList<Student> studentArr;   //create array list of students
             studentArr = Roster.parseFile(path);    //fill studentArr using parseFile function in Roster.java
-            /**
-             * TODO:
-             * ADD STUDENTS INTO JTABLE
-             **/
+            
+            //create JTable
+            String col[] = {"ID", "First Name", "Last Name", "Program", "Level", "ASURITE"};    //column headers
+            String data[][] = new String[studentArr.size()][6]; //stores data to be put into table
+            
+            for(int i = 0; i < studentArr.size(); i++){ //fill data[][] with arraylist data
+                data[i][0] = studentArr.get(i).asuRiteID;
+                data[i][1] = studentArr.get(i).firstName;
+                data[i][2] = studentArr.get(i).lastName;
+                data[i][3] = studentArr.get(i).program;
+                data[i][4] = studentArr.get(i).level;
+                data[i][5] = studentArr.get(i).asuRiteID;
+            }
+            
+            JTable table = new JTable(data, col);   //create Jtable
+            JScrollPane scrollPane = new JScrollPane(table);    //create ScrollPane
+            //TODO: ADD JTABLE/SCROLLPANE TO WINDOW
+             
         }
 
         else if(e.getSource()==i2){
@@ -62,7 +79,7 @@ public class GUI implements ActionListener  {
             System.out.println("Plot Data");
         }
 
-        else if(e.getSource()==menu2){
+        else if(e.getSource()==aboutButton){
             System.out.println("About");
             JFrame frame = new JFrame("About");
             JLabel lblFName = new JLabel("TEAM MEMBERS: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
@@ -77,6 +94,7 @@ public class GUI implements ActionListener  {
             frame.setSize(500, 70);
             frame.getContentPane().add(panel);
             frame.setVisible(true);
+            frame.setLocationRelativeTo(null);
         }
     }
 }

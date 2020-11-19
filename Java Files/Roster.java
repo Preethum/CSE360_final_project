@@ -10,7 +10,7 @@ class Student{  //class to hold each students info
     String program;
     String level;
     String asuRiteID;
-    int id;
+    String id;
 
     Student(){
         firstName = "";
@@ -18,7 +18,7 @@ class Student{  //class to hold each students info
         program = "";
         level = "";
         asuRiteID = "";
-        id = 0;
+        id = "";
     }
 }
 
@@ -41,7 +41,7 @@ class Roster {
         catch(Exception e){ //handle PathNotFound exception
             System.out.println(e);
             scanner.close();
-            return null;
+            return new ArrayList<Student>();
         }
         
         String line = "";
@@ -53,7 +53,7 @@ class Roster {
             String[] studentInfo = line.split(","); //create array to store each student info parsed using a comma
 
             //update student to have the correct info
-            student.id = Integer.parseInt(studentInfo[0]);
+            student.id = studentInfo[0];
             student.firstName = studentInfo[1];
             student.lastName = studentInfo[2];
             student.program = studentInfo[3];
