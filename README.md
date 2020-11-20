@@ -1,23 +1,31 @@
 # CSE360_final_project
 This is the Final Project for CSE 360. This project utilizes SQL and java libraries to display project information efficiently through a custom GUI interface.
 ### Members:
-- Preet Patel
-- Brent Li
+- Preet Patel         *1214425589*
+- Brent Li            *1214890820*
+- Andrew Lauricella   *1214833867*
+- Chase Kimball       *1214649722*
+- Martin Mople        *1215808321*
 
-## Attendance.java
+### Attendance.java
 This will handle the attendance inputs from the user
 
-## GUI.java
+###
+GUI.java
 This is the main GUI file. All GUI elements will be created/called here
 
-## Plot.java
+
+### Plot.java
 Contains all functions needed to handle plotting the student/user information onto a scatterplot
 
-## Project.java
+
+### Project.java
 This is the main file, contains a main function that calls the GUI class
 
-## Roster.java
+
+### Roster.java
 Main roster file, handles opening a file explorer for the user to select a CSV file, then returns an ArrayList of all students within the file
 
-## Save.java
+
+### Save.java
 Saves the table of student information to a SQL server
