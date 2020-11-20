@@ -10,8 +10,7 @@ This is the Final Project for CSE 360. This project utilizes SQL and java librar
 ### Attendance.java
 This will handle the attendance inputs from the user
 
-###
-GUI.java
+### GUI.java
 This is the main GUI file. All GUI elements will be created/called here
 
 
