@@ -67,27 +67,27 @@ class GUI implements ActionListener  {
              
         }
 
-        else if(e.getSource()==i2){
+        else if(e.getSource()==i2){ //user wants to add attendance
             System.out.println("Add Attendance");
         }
 
-        else if(e.getSource()==i3){
+        else if(e.getSource()==i3){ //save info 
             System.out.println("Save");
         }
 
-        else if(e.getSource()==i4){
+        else if(e.getSource()==i4){ //user wants to plot data
             System.out.println("Plot Data");
         }
 
-        else if(e.getSource()==aboutButton){
+        else if(e.getSource()==aboutButton){    //about button handler
             System.out.println("About");
             JFrame frame = new JFrame("About");
-            JLabel lblFName = new JLabel("TEAM MEMBERS: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+            JLabel lblFName = new JLabel("<html>TEAM MEMBERS:<br> Brent Li, Preet Patel, Martin Ople, Andrew Lauricella, Chase Kimball</html>");
             
             JPanel panel = new JPanel();
             
             panel.add(lblFName);
-            frame.setSize(500, 70);
+            frame.setSize(500, 300);
             frame.getContentPane().add(panel);
             frame.setVisible(true);
             frame.setLocationRelativeTo(null);
