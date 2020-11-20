@@ -1,5 +1,5 @@
 //Plot Data function under File tab
 
-public class Plot{
+class Plot{
     //TO BE IMPLEMENTED
 }

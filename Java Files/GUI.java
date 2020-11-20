@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GUI implements ActionListener  {
+class GUI implements ActionListener  {
     JFrame f;
     JMenu fileMenu;
     JButton aboutButton;  
