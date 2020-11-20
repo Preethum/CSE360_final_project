@@ -5,7 +5,7 @@ This is the Final Project for CSE 360. This project utilizes SQL and java librar
 - Brent Li--------------*1214890820*
 - Andrew Lauricella---*1214833867*
 - Chase Kimball-------*1214649722*
-- Martin Mople-------*1215808321*
+- Martin Ople-------*1215808321*
 
 ### Attendance.java
 This will handle the attendance inputs from the user
