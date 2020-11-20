@@ -83,14 +83,10 @@ class GUI implements ActionListener  {
             System.out.println("About");
             JFrame frame = new JFrame("About");
             JLabel lblFName = new JLabel("TEAM MEMBERS: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-            // JLabel lblFName1 = new JLabel("TEAM MEMBERS:");
-            // lblFName1.setHorizontalTextPosition(5);
             
             JPanel panel = new JPanel();
             
             panel.add(lblFName);
-            // panel.add(lblFName1);
-            //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(500, 70);
             frame.getContentPane().add(panel);
             frame.setVisible(true);
