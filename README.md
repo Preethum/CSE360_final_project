@@ -1,11 +1,11 @@
 # CSE360_final_project
 This is the Final Project for CSE 360. This project utilizes SQL and java libraries to display project information efficiently through a custom GUI interface.
 ### Members:
-- Preet Patel         *1214425589*
-- Brent Li            *1214890820*
-- Andrew Lauricella   *1214833867*
-- Chase Kimball       *1214649722*
-- Martin Mople        *1215808321*
+- Preet Patel---------*1214425589*
+- Brent Li------------*1214890820*
+- Andrew Lauricella---*1214833867*
+- Chase Kimball-------*1214649722*
+- Martin Mople--------*1215808321*
 
 ### Attendance.java
 This will handle the attendance inputs from the user
