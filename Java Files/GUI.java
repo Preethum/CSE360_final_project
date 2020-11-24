@@ -1,57 +1,62 @@
 // Used for the Graphical User Interface
 import java.util.*;
 import javax.swing.*;
-import javax.swing.border.Border;
-
+import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 class GUI implements ActionListener  {
-    JFrame f;
+    JFrame frame;
     JMenu fileMenu;
     JButton aboutButton;  
     JMenuItem i1, i2, i3, i4;  
-    JPanel mid;
+    JPanel mainPanel;
+    JTable table;
+    JScrollPane scrollPane;
 
     public void Model() {
-        f = new JFrame("CSE360 Final Project");
-        mid = new JPanel(new BorderLayout());
-        JPanel menu = new JPanel(new BorderLayout());
+        //create frame and main panel
+        frame = new JFrame("CSE360 Final Project");
+        mainPanel = new JPanel(new BorderLayout());
         
-
-        
+        //create menu bar
         JMenuBar mb=new JMenuBar();  
         fileMenu=new JMenu("File");   
         aboutButton = new JButton("About");
 
+        //add items to file menu
         i1=new JMenuItem("Load a Roster");
         i2=new JMenuItem("Add Attendance");  
         i3=new JMenuItem("Save");  
         i4=new JMenuItem("Plot Data"); 
-         
+
+        //add items to menubar
         fileMenu.add(i1);
         fileMenu.add(i2); 
         fileMenu.add(i3);  
         fileMenu.add(i4); 
         mb.add(fileMenu);
-        mb.add(aboutButton);  
+        mb.add(aboutButton);
+        mb.setBackground(Color.red);
 
-        i1.addActionListener(this);
-        i2.addActionListener(this);
-        i3.addActionListener(this);
-        i4.addActionListener(this);
-        aboutButton.addActionListener(this);
+        //create JTable
+        table = new JTable();
+        table.setBackground(Color.magenta);
+        scrollPane = new JScrollPane(table);
+        scrollPane.setBackground(Color.blue);
 
-        menu.add(mb,BorderLayout.BEFORE_LINE_BEGINS);
-    
-        //f.setJMenuBar(mb);  
-        f.add(menu);
-        f.setSize(1000,600);  
-        f.setLayout(null);  
-        f.setVisible(true);
-        f.setLocationRelativeTo(null);
-        }
+        //add menu bar to menu bar panel
+        mainPanel.add(mb);
+        mainPanel.add(scrollPane);
+        mainPanel.setBackground(Color.yellow);
+
+        //set frame constraints
+        frame.add(mb, BorderLayout.NORTH);
+        frame.setSize(1000, 600);
+        frame.setBackground(Color.green);
+        frame.setVisible(true);
+    }
 
     public void actionPerformed(ActionEvent e){  
         if(e.getSource()==i1){
@@ -81,16 +86,9 @@ class GUI implements ActionListener  {
                 data[i][5] = studentArr.get(i).asuRiteID;
             }
             
-            JTable table = new JTable(data, col);   //create Jtable
-            JScrollPane scrollPane = new JScrollPane(table);    //create ScrollPane
-            //TODO: ADD JTABLE/SCROLLPANE TO WINDOW
-            // f.add(table,FlowLayout.LEADING);
-            
-            mid.add(scrollPane,BorderLayout.CENTER);
-            f.add(mid);
-            
-            f.repaint();
-             
+            table = new JTable(data, col);   //create Jtable
+            scrollPane = new JScrollPane(table);    //create ScrollPane
+            //TODO: ADD JTABLE/SCROLLPANE TO WINDOW             
         }
 
         else if(e.getSource()==i2){ //user wants to add attendance
@@ -107,16 +105,16 @@ class GUI implements ActionListener  {
 
         else if(e.getSource()==aboutButton){    //about button handler
             System.out.println("About");
-            JFrame frame = new JFrame("About");
+            JFrame aboutFrame = new JFrame("About");
             JLabel lblFName = new JLabel("<html>TEAM MEMBERS:<br> Brent Li, Preet Patel, Martin Ople, Andrew Lauricella, Chase Kimball</html>");
             
             JPanel panel = new JPanel();
             
             panel.add(lblFName);
-            frame.setSize(500, 300);
-            frame.getContentPane().add(panel);
-            frame.setVisible(true);
-            frame.setLocationRelativeTo(null);
+            aboutFrame.setSize(500, 300);
+            aboutFrame.getContentPane().add(panel);
+            aboutFrame.setVisible(true);
+            aboutFrame.setLocationRelativeTo(null);
         }
     }
 }
