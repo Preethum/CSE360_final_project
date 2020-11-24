@@ -22,7 +22,7 @@ class Date {
     private int year;
 
     Date() {
-        month = "";
+        month = "null";
         day = 0;
         year = 0;
     }
@@ -33,10 +33,10 @@ class Date {
         year = yearNew;
     }
 
-    // returns an array of the date values for easy access in the format of {month, day, year}
-    public Object[] getDate() {
-        Object[] arr = { month, day, year };
-        return arr;
+    // returns an array of the date values for easy access in the format of {month,
+    // day, year}
+    public Date getDate() {
+        return new Date(month, day, year);
     }
 
     // set the full date
