@@ -51,6 +51,7 @@ class GUI implements ActionListener  {
         String col[] = {"ID", "First Name", "Last Name", "Program", "Level", "ASURITE"};    //column headers
         String data[][] = new String[1][6]; //stores data to be put into table
         table = new JTable(data, col);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         scrollPane = new JScrollPane(table);
 
         //set frame constraints
@@ -79,11 +80,14 @@ class GUI implements ActionListener  {
                 table.getModel().setValueAt(studentArr.get(i).id, i, 5);
                 
             }
+<<<<<<< HEAD
             
             table.repaint();
            
 
             
+=======
+>>>>>>> 136b6ffe71dcae9a75de8a2ad4267a536f8abcdf
         }
 
         else if(e.getSource()==i2){ //user wants to add attendance
