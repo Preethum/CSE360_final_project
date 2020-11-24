@@ -16,16 +16,71 @@ class StudentAttendance{
 }
 
 //date class to keep track of the date that the user selects
-class Date{
-    public String day;
-    public String month;
-    public String year;
+class Date {
+    private int day;
+    private String month;
+    private int year;
 
-    Date(){
-        day = "";
+    Date() {
         month = "";
-        year = "";
+        day = 0;
+        year = 0;
     }
+
+    Date(String monthNew, int dayNew, int yearNew) {
+        month = monthNew;
+        day = dayNew;
+        year = yearNew;
+    }
+
+    // returns an array of the date values for easy access in the format of {month, day, year}
+    public Object[] getDate() {
+        Object[] arr = { month, day, year };
+        return arr;
+    }
+
+    // set the full date
+    public void setDate(String monthNew, int dayNew, int yearNew) {
+        month = monthNew;
+        day = dayNew;
+        year = yearNew;
+    }
+
+    // set the month
+    public void setMonth(String monthNew) {
+        month = monthNew;
+    }
+
+    // set the day
+    public void setDay(int dayNew) {
+        day = dayNew;
+    }
+
+    // set the year
+    public void setYear(int yearNew) {
+        year = yearNew;
+    }
+
+    // returns the month as a string
+    public String getMonth() {
+        return month;
+    }
+
+    // returns the day as an integer
+    public int getDay() {
+        return day;
+    }
+
+    // returns the year as an integer
+    public int getYear() {
+        return year;
+    }
+
+    // returns the date as a string in the format of MM/DD/YYYY
+    public String toString() {
+        return month + "/" + day + "/" + year;
+    }
+
 }
 
 class Attendance{
