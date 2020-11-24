@@ -10,15 +10,13 @@ class GUI implements ActionListener  {
     JFrame frame;
     JMenu fileMenu;
     JButton aboutButton;  
-    JMenuItem i1, i2, i3, i4;  
-    JPanel mainPanel;
+    JMenuItem i1, i2, i3, i4;
     JTable table;
     JScrollPane scrollPane;
 
     public void Model() {
         //create frame and main panel
         frame = new JFrame("CSE360 Final Project");
-        mainPanel = new JPanel(new BorderLayout());
         
         //create menu bar
         JMenuBar mb=new JMenuBar();  
@@ -41,18 +39,14 @@ class GUI implements ActionListener  {
         mb.setBackground(Color.red);
 
         //create JTable
-        table = new JTable();
-        table.setBackground(Color.magenta);
+        String col[] = {"ID", "First Name", "Last Name", "Program", "Level", "ASURITE"};    //column headers
+        String data[][] = new String[1][6]; //stores data to be put into table
+        table = new JTable(data, col);
         scrollPane = new JScrollPane(table);
-        scrollPane.setBackground(Color.blue);
-
-        //add menu bar to menu bar panel
-        mainPanel.add(mb);
-        mainPanel.add(scrollPane);
-        mainPanel.setBackground(Color.yellow);
 
         //set frame constraints
         frame.add(mb, BorderLayout.NORTH);
+        frame.add(scrollPane, BorderLayout.CENTER);
         frame.setSize(1000, 600);
         frame.setBackground(Color.green);
         frame.setVisible(true);
@@ -69,15 +63,8 @@ class GUI implements ActionListener  {
             String col[] = {"ID", "First Name", "Last Name", "Program", "Level", "ASURITE"};    //column headers
             String data[][] = new String[studentArr.size()][6]; //stores data to be put into table
             
-            for(int i = 0; i < studentArr.size(); i++){ //fill data[][] with arraylist data
-                System.out.print(studentArr.get(i).asuRiteID);
-                System.out.print(studentArr.get(i).firstName);
-                System.out.print(studentArr.get(i).lastName);
-                System.out.print(studentArr.get(i).program);
-                System.out.print(studentArr.get(i).level);
-                System.out.print(studentArr.get(i).asuRiteID);
-                System.out.println("");
-                
+            //fill data[][] with arraylist data
+            for(int i = 0; i < studentArr.size(); i++){ 
                 data[i][0] = studentArr.get(i).asuRiteID;
                 data[i][1] = studentArr.get(i).firstName;
                 data[i][2] = studentArr.get(i).lastName;
@@ -87,8 +74,9 @@ class GUI implements ActionListener  {
             }
             
             table = new JTable(data, col);   //create Jtable
-            scrollPane = new JScrollPane(table);    //create ScrollPane
-            //TODO: ADD JTABLE/SCROLLPANE TO WINDOW             
+            frame.remove(scrollPane);   //remove old scrollpane
+            scrollPane = new JScrollPane(table);    //add updated table to scrollPane
+            frame.add(scrollPane, BorderLayout.CENTER); //add scrollPane
         }
 
         else if(e.getSource()==i2){ //user wants to add attendance
