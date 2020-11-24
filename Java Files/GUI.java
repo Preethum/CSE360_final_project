@@ -1,6 +1,8 @@
 // Used for the Graphical User Interface
 import java.util.*;
 import javax.swing.*;
+import javax.swing.text.html.parser.TagElement;
+
 import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -22,18 +24,25 @@ class GUI implements ActionListener  {
         JMenuBar mb=new JMenuBar();  
         fileMenu=new JMenu("File");   
         aboutButton = new JButton("About");
+        aboutButton.addActionListener(this);
 
         //add items to file menu
         i1=new JMenuItem("Load a Roster");
         i2=new JMenuItem("Add Attendance");  
         i3=new JMenuItem("Save");  
-        i4=new JMenuItem("Plot Data"); 
-
+        i4=new JMenuItem("Plot Data");
+        
+        
+        i1.addActionListener(this);
+        i2.addActionListener(this);
+        i3.addActionListener(this);
+        i4.addActionListener(this);
         //add items to menubar
         fileMenu.add(i1);
         fileMenu.add(i2); 
         fileMenu.add(i3);  
         fileMenu.add(i4); 
+
         mb.add(fileMenu);
         mb.add(aboutButton);
         mb.setBackground(Color.red);
@@ -59,24 +68,22 @@ class GUI implements ActionListener  {
             ArrayList<Student> studentArr;   //create array list of students
             studentArr = Roster.parseFile(path);    //fill studentArr using parseFile function in Roster.java
             
-            //create JTable
-            String col[] = {"ID", "First Name", "Last Name", "Program", "Level", "ASURITE"};    //column headers
-            String data[][] = new String[studentArr.size()][6]; //stores data to be put into table
             
             //fill data[][] with arraylist data
             for(int i = 0; i < studentArr.size(); i++){ 
-                data[i][0] = studentArr.get(i).asuRiteID;
-                data[i][1] = studentArr.get(i).firstName;
-                data[i][2] = studentArr.get(i).lastName;
-                data[i][3] = studentArr.get(i).program;
-                data[i][4] = studentArr.get(i).level;
-                data[i][5] = studentArr.get(i).asuRiteID;
+                table.getModel().setValueAt(studentArr.get(i).asuRiteID, i, 0);
+                table.getModel().setValueAt(studentArr.get(i).firstName, i, 1);
+                table.getModel().setValueAt(studentArr.get(i).lastName, i, 2);
+                table.getModel().setValueAt(studentArr.get(i).program, i, 3);
+                table.getModel().setValueAt(studentArr.get(i).level, i, 4);
+                table.getModel().setValueAt(studentArr.get(i).id, i, 5);
+                
             }
             
-            table = new JTable(data, col);   //create Jtable
-            frame.remove(scrollPane);   //remove old scrollpane
-            scrollPane = new JScrollPane(table);    //add updated table to scrollPane
-            frame.add(scrollPane, BorderLayout.CENTER); //add scrollPane
+            table.repaint();
+           
+
+            
         }
 
         else if(e.getSource()==i2){ //user wants to add attendance
