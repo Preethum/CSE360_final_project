@@ -1,0 +1,2 @@
+1210101010,Javier,Gonzalez,CS,Grad,javiergs
+0,John,Doe,Eng,underGrad,jdoe24

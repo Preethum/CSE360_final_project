@@ -1,6 +1,9 @@
 // Used for the Graphical User Interface
 import java.util.*;
 import javax.swing.*;
+import javax.swing.border.Border;
+
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,9 +12,15 @@ class GUI implements ActionListener  {
     JMenu fileMenu;
     JButton aboutButton;  
     JMenuItem i1, i2, i3, i4;  
+    JPanel mid;
 
     public void Model() {
         f = new JFrame("CSE360 Final Project");
+        mid = new JPanel(new BorderLayout());
+        JPanel menu = new JPanel(new BorderLayout());
+        
+
+        
         JMenuBar mb=new JMenuBar();  
         fileMenu=new JMenu("File");   
         aboutButton = new JButton("About");
@@ -34,7 +43,10 @@ class GUI implements ActionListener  {
         i4.addActionListener(this);
         aboutButton.addActionListener(this);
 
-        f.setJMenuBar(mb);  
+        menu.add(mb,BorderLayout.BEFORE_LINE_BEGINS);
+    
+        //f.setJMenuBar(mb);  
+        f.add(menu);
         f.setSize(1000,600);  
         f.setLayout(null);  
         f.setVisible(true);
@@ -53,6 +65,14 @@ class GUI implements ActionListener  {
             String data[][] = new String[studentArr.size()][6]; //stores data to be put into table
             
             for(int i = 0; i < studentArr.size(); i++){ //fill data[][] with arraylist data
+                System.out.print(studentArr.get(i).asuRiteID);
+                System.out.print(studentArr.get(i).firstName);
+                System.out.print(studentArr.get(i).lastName);
+                System.out.print(studentArr.get(i).program);
+                System.out.print(studentArr.get(i).level);
+                System.out.print(studentArr.get(i).asuRiteID);
+                System.out.println("");
+                
                 data[i][0] = studentArr.get(i).asuRiteID;
                 data[i][1] = studentArr.get(i).firstName;
                 data[i][2] = studentArr.get(i).lastName;
@@ -64,6 +84,12 @@ class GUI implements ActionListener  {
             JTable table = new JTable(data, col);   //create Jtable
             JScrollPane scrollPane = new JScrollPane(table);    //create ScrollPane
             //TODO: ADD JTABLE/SCROLLPANE TO WINDOW
+            // f.add(table,FlowLayout.LEADING);
+            
+            mid.add(scrollPane,BorderLayout.CENTER);
+            f.add(mid);
+            
+            f.repaint();
              
         }
 
