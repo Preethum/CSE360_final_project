@@ -42,6 +42,7 @@ class GUI implements ActionListener  {
         String col[] = {"ID", "First Name", "Last Name", "Program", "Level", "ASURITE"};    //column headers
         String data[][] = new String[1][6]; //stores data to be put into table
         table = new JTable(data, col);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         scrollPane = new JScrollPane(table);
 
         //set frame constraints
@@ -72,11 +73,6 @@ class GUI implements ActionListener  {
                 data[i][4] = studentArr.get(i).level;
                 data[i][5] = studentArr.get(i).asuRiteID;
             }
-            
-            table = new JTable(data, col);   //create Jtable
-            frame.remove(scrollPane);   //remove old scrollpane
-            scrollPane = new JScrollPane(table);    //add updated table to scrollPane
-            frame.add(scrollPane, BorderLayout.CENTER); //add scrollPane
         }
 
         else if(e.getSource()==i2){ //user wants to add attendance
