@@ -46,13 +46,13 @@ class Roster {
         
         String line = "";
         ArrayList<Student> studentArr = new ArrayList<Student>();
-        Student student = new Student();
 
         while(scanner.hasNextLine()){   //add each line of the file to fileLines
             line = scanner.nextLine();
             String[] studentInfo = line.split(","); //create array to store each student info parsed using a comma
 
             //update student to have the correct info
+            Student student = new Student();
             student.id = studentInfo[0];
             student.firstName = studentInfo[1];
             student.lastName = studentInfo[2];

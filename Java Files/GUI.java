@@ -1,7 +1,7 @@
 // Used for the Graphical User Interface
 import java.util.*;
 import javax.swing.*;
-import javax.swing.text.html.parser.TagElement;
+import javax.swing.table.DefaultTableModel;
 
 import java.awt.*;
 import java.awt.BorderLayout;
@@ -14,6 +14,7 @@ class GUI implements ActionListener  {
     JButton aboutButton;  
     JMenuItem i1, i2, i3, i4;
     JTable table;
+    DefaultTableModel model;
     JScrollPane scrollPane;
 
     public void Model() {
@@ -49,8 +50,10 @@ class GUI implements ActionListener  {
 
         //create JTable
         String col[] = {"ID", "First Name", "Last Name", "Program", "Level", "ASURITE"};    //column headers
-        String data[][] = new String[1][6]; //stores data to be put into table
-        table = new JTable(data, col);
+        String data[][] = new String[0][6]; //stores data to be put into table
+        model = new DefaultTableModel(data, col);
+        table = new JTable();
+        table.setModel(model);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         scrollPane = new JScrollPane(table);
 
@@ -64,30 +67,13 @@ class GUI implements ActionListener  {
 
     public void actionPerformed(ActionEvent e){  
         if(e.getSource()==i1){
-            System.out.println("Load a Roster");
             String path = Roster.openFileChooser(); //open a file chooser and save the selected file's path to path
             ArrayList<Student> studentArr;   //create array list of students
             studentArr = Roster.parseFile(path);    //fill studentArr using parseFile function in Roster.java
-            
-            
-            //fill data[][] with arraylist data
-            for(int i = 0; i < studentArr.size(); i++){ 
-                table.getModel().setValueAt(studentArr.get(i).asuRiteID, i, 0);
-                table.getModel().setValueAt(studentArr.get(i).firstName, i, 1);
-                table.getModel().setValueAt(studentArr.get(i).lastName, i, 2);
-                table.getModel().setValueAt(studentArr.get(i).program, i, 3);
-                table.getModel().setValueAt(studentArr.get(i).level, i, 4);
-                table.getModel().setValueAt(studentArr.get(i).id, i, 5);
-                
-            }
-<<<<<<< HEAD
-            
-            table.repaint();
-           
 
-            
-=======
->>>>>>> 136b6ffe71dcae9a75de8a2ad4267a536f8abcdf
+            for(int i = 0; i < studentArr.size(); i++){
+                model.insertRow(model.getRowCount(), new Object[] {studentArr.get(i).id, studentArr.get(i).firstName, studentArr.get(i).lastName, studentArr.get(i).program, studentArr.get(i).level, studentArr.get(i).asuRiteID});
+            }
         }
 
         else if(e.getSource()==i2){ //user wants to add attendance

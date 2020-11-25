@@ -107,13 +107,13 @@ class Attendance{
         
         String line = "";
         ArrayList<StudentAttendance> studentAttendanceArr = new ArrayList<StudentAttendance>();
-        StudentAttendance studentAttendance = new StudentAttendance();
 
         while(scanner.hasNextLine()){   //add each line of the file to fileLines
             line = scanner.nextLine();
             String[] studentAttendanceInfo = line.split(","); //create array to store each student info parsed using a comma
 
             //update student to have the correct info
+            StudentAttendance studentAttendance = new StudentAttendance();
             studentAttendance.ASURITE = studentAttendanceInfo[0];
             studentAttendance.time = Integer.parseInt(studentAttendanceInfo[1]);
             //add student to arrayList
