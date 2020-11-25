@@ -46,7 +46,6 @@ class GUI implements ActionListener  {
 
         mb.add(fileMenu);
         mb.add(aboutButton);
-        mb.setBackground(Color.red);
 
         //create JTable
         String col[] = {"ID", "First Name", "Last Name", "Program", "Level", "ASURITE"};    //column headers
@@ -61,7 +60,7 @@ class GUI implements ActionListener  {
         frame.add(mb, BorderLayout.NORTH);
         frame.add(scrollPane, BorderLayout.CENTER);
         frame.setSize(1000, 600);
-        frame.setBackground(Color.green);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 

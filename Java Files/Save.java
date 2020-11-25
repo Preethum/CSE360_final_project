@@ -28,8 +28,8 @@ class Save extends JFrame {
                 if(i<table.getColumnCount() - 1){   //if current column is not the last one
                     bw.write(",");
                 }
-                bw.write("\n");
             }
+            bw.write("\n");
 
             //add contents of JTable to save file
             for(int i = 0; i < table.getRowCount(); i++){
