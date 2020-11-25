@@ -83,6 +83,14 @@ class GUI implements ActionListener  {
 
         else if(e.getSource()==i3){ //save info 
             System.out.println("Save");
+            String path = Roster.openFileChooser();
+            try{
+                Save penins = new Save();
+                penins.file_exp(table,path);
+            }catch(Exception ex){
+                System.out.println("done");
+            }
+            
         }
 
         else if(e.getSource()==i4){ //user wants to plot data
