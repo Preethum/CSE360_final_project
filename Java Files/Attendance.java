@@ -20,7 +20,7 @@ class StudentAttendance{
     }
 }
 
-class Attendance extends JFrame implements ActionListener{
+class Attendance extends JFrame{
     //opens the file chooser and returns the chosen file's path
     public String openFileChooser(){
         JFileChooser jFile = new JFileChooser();
@@ -58,46 +58,31 @@ class Attendance extends JFrame implements ActionListener{
         }
         scanner.close();
 
+        System.out.println("FIRST");
+        for(int j = 0; j < studentAttendanceArr.size(); j++){
+            System.out.println(studentAttendanceArr.get(j).ASURITE + " " + studentAttendanceArr.get(j).time);
+        }
+        System.out.println();
+
         for(int i = 0; i < studentAttendanceArr.size(); i++){   //scan array for duplicate ASURITEs, if found, combine the time
-            for(int j = 0; j < studentAttendanceArr.size(); j++){   //scan is completed using nested for loop
+            for(int j = i + 1; j < studentAttendanceArr.size(); j++){   //scan is completed using nested for loop
+                System.out.println(studentAttendanceArr.get(i).ASURITE + " = " + studentAttendanceArr.get(j).ASURITE);
                 if(studentAttendanceArr.get(i).ASURITE.equals(studentAttendanceArr.get(j).ASURITE)){    //matching ASURITE ids are found, add the times together and remove duplicate
-                    studentAttendanceArr.get(i).time += studentAttendanceArr.get(j).time;
-                    studentAttendanceArr.remove(j);
+                    StudentAttendance studentAttendance = new StudentAttendance();
+                    
+                    StudentAttendance temp1 = studentAttendanceArr.get(i);
+                    StudentAttendance temp2 = studentAttendanceArr.get(j);
+                    
+                    studentAttendance.ASURITE = studentAttendanceArr.get(i).ASURITE;
+                    studentAttendance.time = studentAttendanceArr.get(i).time + studentAttendanceArr.get(j).time; 
+                    studentAttendanceArr.add(studentAttendance);
+
+                    studentAttendanceArr.remove(temp1);
+                    studentAttendanceArr.remove(temp2);
                 }
             }
         }
 
         return studentAttendanceArr;
-    }
-
-    public String datePicker(){
-        String date = "";
-        JFrame frame = new JFrame("Pick a date");
-        
-        //string arrays to hold all possible selections
-        String[] dayStrings = {"Select a day", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}
-        String[] monthStrings = {"Select a month", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec", };
-        
-        //create the combo boxes
-        JComboBox dayList = new JComboBox(dayStrings);
-        JComboBox monthList = new JComboBox(monthStrings);
-        JButton setButton = new JButton("Set");
-        setButton.addActionListener(this);
-
-        //set default item
-        dayList.setSelectedIndex(0);
-        dayList.setEditable(true);
-        monthList.setSelectedIndex(0);
-        monthList.setEditable(true);
-
-        frame.add(dayList, BorderLayout.WEST);
-        frame.add(monthList, BorderLayout.EAST);
-        frame.add(setButton, BorderLayout.SOUTH);
-    }
-
-    //when set button is pressed
-    public void actionPerformed(ActionEvent e){
-        //set 2 strings to currnetly selected day and month
-        //get file
-    }
+    }    
 }

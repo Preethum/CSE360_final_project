@@ -9,11 +9,12 @@ import java.awt.event.ActionListener;
 class GUI implements ActionListener  {
     JFrame frame;
     JMenu fileMenu;
-    JButton aboutButton;  
+    JButton aboutButton, setButton;  
     JMenuItem i1, i2, i3, i4;
     JTable table;
     DefaultTableModel model;
     JScrollPane scrollPane;
+    JComboBox dayList, monthList;
 
     public void Model() {
         //create frame and main panel
@@ -63,6 +64,35 @@ class GUI implements ActionListener  {
         frame.setVisible(true);
     }
 
+    //date picker creation
+    public void datePicker(){
+        String date = "";
+        JFrame frame = new JFrame("Pick a date");
+        
+        //string arrays to hold all possible selections
+        String[] dayStrings = {"Select a day", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
+        String[] monthStrings = {"Select a month", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec", };
+        
+        //create the combo boxes
+        dayList = new JComboBox(dayStrings);
+        monthList = new JComboBox(monthStrings);
+        setButton = new JButton("Set");
+        setButton.addActionListener(this);
+
+        //set default item
+        dayList.setSelectedIndex(0);
+        dayList.setEditable(true);
+        monthList.setSelectedIndex(0);
+        monthList.setEditable(true);
+
+        frame.add(dayList, BorderLayout.WEST);
+        frame.add(monthList, BorderLayout.EAST);
+        frame.add(setButton, BorderLayout.SOUTH);
+        frame.setSize(255,100);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);        
+    }
+    
     public void actionPerformed(ActionEvent e){  
         if(e.getSource()==i1){
             String path = Roster.openFileChooser(); //open a file chooser and save the selected file's path to path
@@ -77,24 +107,7 @@ class GUI implements ActionListener  {
         else if(e.getSource()==i2){ //user wants to add attendance
             //date handling
             Attendance attendance = new Attendance();
-
-            String[] strDate = attendance.datePicker().split("-");  //get date in the format of a string array in the format [year, day, month]
-            String newDate = strDate[2] + " " + strDate[1]; //create new date header
-            model.addColumn(newDate);   //add column to the table
-
-            //file handling
-            String path = attendance.openFileChooser();
-            ArrayList<StudentAttendance> studentAttendanceArr = attendance.parseFile(path);
-            
-            //adding data to the table
-            for(int i = 0; i < table.getRowCount(); i++){   //for each row
-                table.getModel().setValueAt(0, i, table.getColumnCount() - 1);  //initialize to 0
-                for(int j = 0; j < studentAttendanceArr.size(); j++){   //for each item in the arraylist
-                    if(table.getValueAt(j, 5).equals(studentAttendanceArr.get(i).ASURITE)){ //current student in the table is the same student at the current index in the arraylist
-                        table.getModel().setValueAt(studentAttendanceArr.get(i).time, i, table.getColumnCount() - 1);   //set new value in the table
-                    }
-                }
-            }
+            datePicker();
         }
 
         else if(e.getSource()==i3){ //save info
@@ -125,5 +138,32 @@ class GUI implements ActionListener  {
             aboutFrame.setVisible(true);
             aboutFrame.setLocationRelativeTo(null);
         }
+
+        else if(e.getSource() == setButton){    //date picker set
+            String newDate = monthList.getSelectedItem() + " " + dayList.getSelectedItem(); //create new date header
+            model.addColumn(newDate);   //add column to the table
+
+            //file handling
+            Attendance attendance = new Attendance();
+            String path = attendance.openFileChooser();
+            ArrayList<StudentAttendance> studentAttendanceArr = attendance.parseFile(path);
+            
+            System.out.println("SECOND");
+            for(int j = 0; j < studentAttendanceArr.size(); j++){
+                System.out.println(studentAttendanceArr.get(j).ASURITE + " " + studentAttendanceArr.get(j).time);
+            }
+
+            //adding data to the table
+            for(int i = 0; i < table.getRowCount(); i++){   //for each row
+                table.getModel().setValueAt(0, i, table.getColumnCount() - 1);  //initialize to 0
+                for(int j = 0; j < studentAttendanceArr.size(); j++){   //for each item in the arraylist
+                    if(table.getValueAt(j, 5).equals(studentAttendanceArr.get(i).ASURITE)){ //current student in the table is the same student at the current index in the arraylist
+                        table.getModel().setValueAt(studentAttendanceArr.get(i).time, i, table.getColumnCount() - 1);   //set new value in the table
+                    }
+                }
+            }
+        }
     }
+
+    
 }
