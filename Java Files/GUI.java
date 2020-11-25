@@ -5,6 +5,10 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 class GUI implements ActionListener  {
     JFrame frame;
@@ -106,7 +110,6 @@ class GUI implements ActionListener  {
 
         else if(e.getSource()==i2){ //user wants to add attendance
             //date handling
-            Attendance attendance = new Attendance();
             datePicker();
         }
 
@@ -115,8 +118,7 @@ class GUI implements ActionListener  {
 
             //save file
             try{
-                Save save = new Save();
-                save.file_exp(table,path);
+                file_exp(path);
             }catch(Exception ex){
                 System.out.println("done");
             }
@@ -147,23 +149,68 @@ class GUI implements ActionListener  {
             Attendance attendance = new Attendance();
             String path = attendance.openFileChooser();
             ArrayList<StudentAttendance> studentAttendanceArr = attendance.parseFile(path);
-            
-            System.out.println("SECOND");
-            for(int j = 0; j < studentAttendanceArr.size(); j++){
-                System.out.println(studentAttendanceArr.get(j).ASURITE + " " + studentAttendanceArr.get(j).time);
-            }
 
             //adding data to the table
             for(int i = 0; i < table.getRowCount(); i++){   //for each row
                 table.getModel().setValueAt(0, i, table.getColumnCount() - 1);  //initialize to 0
                 for(int j = 0; j < studentAttendanceArr.size(); j++){   //for each item in the arraylist
-                    if(table.getValueAt(j, 5).equals(studentAttendanceArr.get(i).ASURITE)){ //current student in the table is the same student at the current index in the arraylist
-                        table.getModel().setValueAt(studentAttendanceArr.get(i).time, i, table.getColumnCount() - 1);   //set new value in the table
+                    if(table.getValueAt(i, 5).equals(studentAttendanceArr.get(j).ASURITE)){ //current student in the table is the same student at the current index in the arraylist
+                        table.getModel().setValueAt(studentAttendanceArr.get(j).time, i, table.getColumnCount() - 1);   //set new value in the table
                     }
                 }
             }
         }
     }
 
-    
+    public void file_exp(String file_loc) {
+        FileWriter fw=null;
+        BufferedWriter bw=null;
+        try{
+            File file = new File(file_loc);
+
+            //create new file only if it doesnt already exist
+            if(!file.exists()){
+                file.createNewFile();
+            }
+
+            //create file and and buffered writer
+            fw = new FileWriter(file.getAbsoluteFile());
+            bw = new BufferedWriter(fw);
+
+            //add column headers to save file
+            for(int i = 0; i < table.getColumnCount(); i++){
+                bw.write(table.getColumnName(i));
+                if(i<table.getColumnCount() - 1){   //if current column is not the last one
+                    bw.write(",");
+                }
+            }
+            bw.write("\n");
+
+            //add contents of JTable to save file
+            for(int i = 0; i < table.getRowCount(); i++){
+                for(int j = 0; j < table.getColumnCount(); j++){
+                    bw.write(table.getModel().getValueAt(i, j).toString());
+                    if(j<table.getColumnCount() - 1){   //if currnent column is not the last one
+                        bw.write(",");
+                    }
+                }
+                bw.write("\n");
+            }
+
+        }catch(IOException ex){
+            System.out.println("");
+        }finally{
+            try{
+                if(bw!=null){
+                    bw.close();
+                }
+                    
+                if(fw!=null){
+                    fw.close();
+                }   
+            }catch(Exception ex){
+                System.out.println("Error in closing the BufferedWriter"+ex);
+            }
+        } 
+    }
 }

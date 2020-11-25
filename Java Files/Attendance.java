@@ -58,15 +58,8 @@ class Attendance extends JFrame{
         }
         scanner.close();
 
-        System.out.println("FIRST");
-        for(int j = 0; j < studentAttendanceArr.size(); j++){
-            System.out.println(studentAttendanceArr.get(j).ASURITE + " " + studentAttendanceArr.get(j).time);
-        }
-        System.out.println();
-
         for(int i = 0; i < studentAttendanceArr.size(); i++){   //scan array for duplicate ASURITEs, if found, combine the time
             for(int j = i + 1; j < studentAttendanceArr.size(); j++){   //scan is completed using nested for loop
-                System.out.println(studentAttendanceArr.get(i).ASURITE + " = " + studentAttendanceArr.get(j).ASURITE);
                 if(studentAttendanceArr.get(i).ASURITE.equals(studentAttendanceArr.get(j).ASURITE)){    //matching ASURITE ids are found, add the times together and remove duplicate
                     StudentAttendance studentAttendance = new StudentAttendance();
                     
