@@ -7,8 +7,7 @@ import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JFrame;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.SqlDateModel;v
-
+import org.jdatepicker.impl.SqlDateModel;
 import javax.swing.*;
 import java.util.*;
 import java.io.*;
@@ -25,76 +24,21 @@ class StudentAttendance{
 }
 
 //date class to keep track of the date that the user selects
-class Date {
-    private int day;
-    private String month;
-    private int year;
+/**class Date {
+    public String day;
+    public String month;
+    public String year;
 
     Date() {
         month = "";
-        day = 0;
-        year = 0;
+        day = "";
+        year = "";
     }
+}**/
 
-    Date(String monthNew, int dayNew, int yearNew) {
-        month = monthNew;
-        day = dayNew;
-        year = yearNew;
-    }
-
-    // returns an array of the date values for easy access in the format of {month,
-    // day, year}
-    public Date getDate() {
-        return new Date(month, day, year);
-    }
-
-    // set the full date
-    public void setDate(String monthNew, int dayNew, int yearNew) {
-        month = monthNew;
-        day = dayNew;
-        year = yearNew;
-    }
-
-    // set the month
-    public void setMonth(String monthNew) {
-        month = monthNew;
-    }
-
-    // set the day
-    public void setDay(int dayNew) {
-        day = dayNew;
-    }
-
-    // set the year
-    public void setYear(int yearNew) {
-        year = yearNew;
-    }
-
-    // returns the month as a string
-    public String getMonth() {
-        return month;
-    }
-
-    // returns the day as an integer
-    public int getDay() {
-        return day;
-    }
-
-    // returns the year as an integer
-    public int getYear() {
-        return year;
-    }
-
-    // returns the date as a string in the format of MM/DD/YYYY
-    public String toString() {
-        return month + "/" + day + "/" + year;
-    }
-
-}
-
-class Attendance{
+class Attendance extends JFrame{
     //opens the file chooser and returns the chosen file's path
-    public static String openFileChooser(){
+    public String openFileChooser(){
         JFileChooser jFile = new JFileChooser();
         jFile.showOpenDialog(null); //show open dialog
 
@@ -103,7 +47,7 @@ class Attendance{
     }
 
     //opens and parses the CSV file to get each student's attendance info
-    public static ArrayList<StudentAttendance> parseFile(String path){
+    public ArrayList<StudentAttendance> parseFile(String path){
         Scanner scanner = new Scanner(System.in);
         try{    //create scanner object
             scanner = new Scanner(new File(path));
@@ -141,34 +85,37 @@ class Attendance{
 
         return studentAttendanceArr;
     }
-    public Date datePicker(){
-        JDatePickerImpl datePicker;
-            SqlDateModel model = new SqlDateModel();
-            Properties p = new Properties();
-            p.put("text.day", "Day");
-            p.put("text.month", "Month");
-            p.put("text.year", "Year");
-            JDatePanelImpl panel = new JDatePanelImpl(model,p);
-            
-            datePicker = new JDatePickerImpl(panel, new AbstractFormatter() {
-                
-                @Override
-                public String valueToString(Object arg0) throws ParseException {
-                    // TODO Auto-generated method stub
-                    if(arg0!= null) {
-                        Calendar cal = (Calendar) arg0;
-                        SimpleDateFormat format = new SimpleDateFormat("yyyy-dd-MM");
-                        String strDate = format.format(cal.getTime());
-                        return strDate;
-                    }
-                    return "";
-                }
-                @Override
-                public Object stringToValue(String arg0) throws ParseException {
-                    // TODO Auto-generated method stub
-                    return null;
-                }
-            }
-        }
-}
 
+    //opens a date picker and returns a date
+    public String datePicker(){
+        JDatePickerImpl datePicker;
+        SqlDateModel model = new SqlDateModel();
+        Properties p = new Properties();
+        p.put("text.day", "Day");
+        p.put("text.month", "Month");
+        p.put("text.year", "Year");
+        JDatePanelImpl panel = new JDatePanelImpl(model,p);
+            
+        datePicker = new JDatePickerImpl(panel, new AbstractFormatter() {
+            @Override
+            public String valueToString(Object arg0) throws ParseException {
+                if(arg0!= null) {
+                    Calendar cal = (Calendar) arg0;
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-dd-MM");
+                    String strDate = format.format(cal.getTime());
+                    return strDate;
+                }
+                return "";
+            }
+            @Override
+            public Object stringToValue(String arg0) throws ParseException {
+                return null;
+            }
+        });
+        this.add(datePicker);
+        this.pack();
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
+        return "";
+    }
+}

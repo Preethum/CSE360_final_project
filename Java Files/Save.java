@@ -7,6 +7,8 @@ import java.io.IOException;
 import javax.swing.*;
 
 class Save extends JFrame {
+    private static final long serialVersionUID = 1L;
+
     public void file_exp(JTable table, String file_loc) {
         FileWriter fw=null;
         BufferedWriter bw=null;

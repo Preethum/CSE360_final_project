@@ -3,7 +3,6 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -76,7 +75,26 @@ class GUI implements ActionListener  {
         }
 
         else if(e.getSource()==i2){ //user wants to add attendance
-            //TODO
+            //date handling
+            Attendance attendance = new Attendance();
+
+            String[] strDate = attendance.datePicker().split("-");  //get date in the format of a string array in the format [year, day, month]
+            String newDate = strDate[2] + " " + strDate[1]; //create new date header
+            model.addColumn(newDate);   //add column to the table
+
+            //file handling
+            String path = attendance.openFileChooser();
+            ArrayList<StudentAttendance> studentAttendanceArr = attendance.parseFile(path);
+            
+            //adding data to the table
+            for(int i = 0; i < table.getRowCount(); i++){   //for each row
+                table.getModel().setValueAt(0, i, table.getColumnCount() - 1);  //initialize to 0
+                for(int j = 0; j < studentAttendanceArr.size(); j++){   //for each item in the arraylist
+                    if(table.getValueAt(j, 5).equals(studentAttendanceArr.get(i).ASURITE)){ //current student in the table is the same student at the current index in the arraylist
+                        table.getModel().setValueAt(studentAttendanceArr.get(i).time, i, table.getColumnCount() - 1);   //set new value in the table
+                    }
+                }
+            }
         }
 
         else if(e.getSource()==i3){ //save info
