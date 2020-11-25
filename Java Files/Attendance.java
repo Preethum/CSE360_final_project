@@ -1,4 +1,13 @@
 // Add Attendance function under File tab
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Properties;
+import javax.swing.JFormattedTextField.AbstractFormatter;
+import javax.swing.JFrame;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.SqlDateModel;v
 
 import javax.swing.*;
 import java.util.*;
@@ -132,4 +141,34 @@ class Attendance{
 
         return studentAttendanceArr;
     }
+    public Date datePicker(){
+        JDatePickerImpl datePicker;
+            SqlDateModel model = new SqlDateModel();
+            Properties p = new Properties();
+            p.put("text.day", "Day");
+            p.put("text.month", "Month");
+            p.put("text.year", "Year");
+            JDatePanelImpl panel = new JDatePanelImpl(model,p);
+            
+            datePicker = new JDatePickerImpl(panel, new AbstractFormatter() {
+                
+                @Override
+                public String valueToString(Object arg0) throws ParseException {
+                    // TODO Auto-generated method stub
+                    if(arg0!= null) {
+                        Calendar cal = (Calendar) arg0;
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy-dd-MM");
+                        String strDate = format.format(cal.getTime());
+                        return strDate;
+                    }
+                    return "";
+                }
+                @Override
+                public Object stringToValue(String arg0) throws ParseException {
+                    // TODO Auto-generated method stub
+                    return null;
+                }
+            }
+        }
 }
+
