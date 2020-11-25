@@ -2,7 +2,6 @@
 import java.util.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
 import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -47,7 +46,6 @@ class GUI implements ActionListener  {
 
         mb.add(fileMenu);
         mb.add(aboutButton);
-        mb.setBackground(Color.red);
 
         //create JTable
         String col[] = {"ID", "First Name", "Last Name", "Program", "Level", "ASURITE"};    //column headers
@@ -62,7 +60,7 @@ class GUI implements ActionListener  {
         frame.add(mb, BorderLayout.NORTH);
         frame.add(scrollPane, BorderLayout.CENTER);
         frame.setSize(1000, 600);
-        frame.setBackground(Color.green);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
@@ -78,27 +76,26 @@ class GUI implements ActionListener  {
         }
 
         else if(e.getSource()==i2){ //user wants to add attendance
-            
+            //TODO
         }
 
-        else if(e.getSource()==i3){ //save info 
-            System.out.println("Save");
-            String path = Roster.openFileChooser();
+        else if(e.getSource()==i3){ //save info
+            String path = Roster.openFileChooser(); //get file path to save to
+
+            //save file
             try{
-                Save penins = new Save();
-                penins.file_exp(table,path);
+                Save save = new Save();
+                save.file_exp(table,path);
             }catch(Exception ex){
                 System.out.println("done");
             }
-            
         }
 
         else if(e.getSource()==i4){ //user wants to plot data
-            System.out.println("Plot Data");
+            //TODO
         }
 
         else if(e.getSource()==aboutButton){    //about button handler
-            System.out.println("About");
             JFrame aboutFrame = new JFrame("About");
             JLabel lblFName = new JLabel("<html>TEAM MEMBERS:<br> Brent Li, Preet Patel, Martin Ople, Andrew Lauricella, Chase Kimball</html>");
             

@@ -31,7 +31,7 @@ class Date {
     private int year;
 
     Date() {
-        month = "null";
+        month = "";
         day = 0;
         year = 0;
     }
