@@ -11,7 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 class GUI implements ActionListener  {
-    JFrame frame;
+    JFrame frame, dateFrame;
     JMenu fileMenu;
     JButton aboutButton, setButton;  
     JMenuItem i1, i2, i3, i4;
@@ -70,8 +70,7 @@ class GUI implements ActionListener  {
 
     //date picker creation
     public void datePicker(){
-        String date = "";
-        JFrame frame = new JFrame("Pick a date");
+        dateFrame = new JFrame("Pick a date");
         
         //string arrays to hold all possible selections
         String[] dayStrings = {"Select a day", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
@@ -89,12 +88,12 @@ class GUI implements ActionListener  {
         monthList.setSelectedIndex(0);
         monthList.setEditable(true);
 
-        frame.add(dayList, BorderLayout.WEST);
-        frame.add(monthList, BorderLayout.EAST);
-        frame.add(setButton, BorderLayout.SOUTH);
-        frame.setSize(255,100);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);        
+        dateFrame.add(dayList, BorderLayout.WEST);
+        dateFrame.add(monthList, BorderLayout.EAST);
+        dateFrame.add(setButton, BorderLayout.SOUTH);
+        dateFrame.setSize(255,100);
+        dateFrame.setLocationRelativeTo(null);
+        dateFrame.setVisible(true);        
     }
     
     public void actionPerformed(ActionEvent e){  
@@ -142,6 +141,7 @@ class GUI implements ActionListener  {
         }
 
         else if(e.getSource() == setButton){    //date picker set
+            dateFrame.dispose();    //close the date picker
             String newDate = monthList.getSelectedItem() + " " + dayList.getSelectedItem(); //create new date header
             model.addColumn(newDate);   //add column to the table
 

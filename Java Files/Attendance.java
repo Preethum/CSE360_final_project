@@ -2,10 +2,6 @@
 
 import java.util.*;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import java.io.*;
 
@@ -21,7 +17,9 @@ class StudentAttendance{
 }
 
 class Attendance extends JFrame{
-    //opens the file chooser and returns the chosen file's path
+    private static final long serialVersionUID = 1L;
+
+    // opens the file chooser and returns the chosen file's path
     public String openFileChooser(){
         JFileChooser jFile = new JFileChooser();
         jFile.showOpenDialog(null); //show open dialog
