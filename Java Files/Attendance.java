@@ -1,15 +1,12 @@
 // Add Attendance function under File tab
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Properties;
-import javax.swing.JFormattedTextField.AbstractFormatter;
-import javax.swing.JFrame;
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.SqlDateModel;
-import javax.swing.*;
+
 import java.util.*;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
 import java.io.*;
 
 //used to keep track of each student's time logged in
@@ -23,20 +20,7 @@ class StudentAttendance{
     }
 }
 
-//date class to keep track of the date that the user selects
-/**class Date {
-    public String day;
-    public String month;
-    public String year;
-
-    Date() {
-        month = "";
-        day = "";
-        year = "";
-    }
-}**/
-
-class Attendance extends JFrame{
+class Attendance extends JFrame implements ActionListener{
     //opens the file chooser and returns the chosen file's path
     public String openFileChooser(){
         JFileChooser jFile = new JFileChooser();
@@ -86,36 +70,34 @@ class Attendance extends JFrame{
         return studentAttendanceArr;
     }
 
-    //opens a date picker and returns a date
     public String datePicker(){
-        JDatePickerImpl datePicker;
-        SqlDateModel model = new SqlDateModel();
-        Properties p = new Properties();
-        p.put("text.day", "Day");
-        p.put("text.month", "Month");
-        p.put("text.year", "Year");
-        JDatePanelImpl panel = new JDatePanelImpl(model,p);
-            
-        datePicker = new JDatePickerImpl(panel, new AbstractFormatter() {
-            @Override
-            public String valueToString(Object arg0) throws ParseException {
-                if(arg0!= null) {
-                    Calendar cal = (Calendar) arg0;
-                    SimpleDateFormat format = new SimpleDateFormat("yyyy-dd-MM");
-                    String strDate = format.format(cal.getTime());
-                    return strDate;
-                }
-                return "";
-            }
-            @Override
-            public Object stringToValue(String arg0) throws ParseException {
-                return null;
-            }
-        });
-        this.add(datePicker);
-        this.pack();
-        this.setVisible(true);
-        this.setLocationRelativeTo(null);
-        return "";
+        String date = "";
+        JFrame frame = new JFrame("Pick a date");
+        
+        //string arrays to hold all possible selections
+        String[] dayStrings = {"Select a day", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}
+        String[] monthStrings = {"Select a month", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec", };
+        
+        //create the combo boxes
+        JComboBox dayList = new JComboBox(dayStrings);
+        JComboBox monthList = new JComboBox(monthStrings);
+        JButton setButton = new JButton("Set");
+        setButton.addActionListener(this);
+
+        //set default item
+        dayList.setSelectedIndex(0);
+        dayList.setEditable(true);
+        monthList.setSelectedIndex(0);
+        monthList.setEditable(true);
+
+        frame.add(dayList, BorderLayout.WEST);
+        frame.add(monthList, BorderLayout.EAST);
+        frame.add(setButton, BorderLayout.SOUTH);
+    }
+
+    //when set button is pressed
+    public void actionPerformed(ActionEvent e){
+        //set 2 strings to currnetly selected day and month
+        //get file
     }
 }
