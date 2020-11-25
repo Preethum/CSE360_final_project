@@ -21,7 +21,7 @@ class GUI implements ActionListener  {
         //create frame and main panel
         frame = new JFrame("CSE360 Final Project");
         
-        //create menu bar
+        //create menu bar and about button
         JMenuBar mb=new JMenuBar();  
         fileMenu=new JMenu("File");   
         aboutButton = new JButton("About");
@@ -33,11 +33,12 @@ class GUI implements ActionListener  {
         i3=new JMenuItem("Save");  
         i4=new JMenuItem("Plot Data");
         
-        
+        //add action listeners to menu items
         i1.addActionListener(this);
         i2.addActionListener(this);
         i3.addActionListener(this);
         i4.addActionListener(this);
+
         //add items to menubar
         fileMenu.add(i1);
         fileMenu.add(i2); 
@@ -71,13 +72,13 @@ class GUI implements ActionListener  {
             ArrayList<Student> studentArr;   //create array list of students
             studentArr = Roster.parseFile(path);    //fill studentArr using parseFile function in Roster.java
 
-            for(int i = 0; i < studentArr.size(); i++){
+            for(int i = 0; i < studentArr.size(); i++){ //add rows to JTable
                 model.insertRow(model.getRowCount(), new Object[] {studentArr.get(i).id, studentArr.get(i).firstName, studentArr.get(i).lastName, studentArr.get(i).program, studentArr.get(i).level, studentArr.get(i).asuRiteID});
             }
         }
 
         else if(e.getSource()==i2){ //user wants to add attendance
-            System.out.println("Add Attendance");
+            
         }
 
         else if(e.getSource()==i3){ //save info 
