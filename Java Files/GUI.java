@@ -128,12 +128,14 @@ class GUI implements ActionListener  {
             XYSeries[] series = new XYSeries[table.getColumnCount() - 6];   //create array of all the dates
             int[] data = new int[table.getRowCount()];
 
+            //set the series array to each column for each date
             for(int col = 6; col < table.getColumnCount(); col++){
                 for(int row = 0; row < table.getRowCount(); row++){
                     data[row] = (int)table.getValueAt(row, col);
                 }
                 series[col - 6] = Plot.createData(data, table.getColumnName(col));
             }
+            //create plot
             Plot plot = new Plot(series);
             plot.setSize(800,400);
             plot.setLocationRelativeTo(null);

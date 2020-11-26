@@ -37,14 +37,16 @@ class Plot extends JFrame{
         setContentPane(panel);
     }
 
+    //create and return a data series given a data array
     public static XYSeries createData(int[] data, String date){
         XYSeries series = new XYSeries(date);
         int[] scatterData = new int[10];
         double percentage;
 
         for(int i = 0; i < data.length; i++){   //fill scatterData
-            percentage = (data[i] / 75.0) * 100;
-            if(percentage >= 100){  //attendance is 100% or more
+            percentage = (data[i] / 75.0) * 100;    //get % attendance out of 75
+            //handle attendances
+            if(percentage >= 100){
                 scatterData[9]++;
             }
             else if(percentage >= 90){
