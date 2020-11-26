@@ -97,7 +97,8 @@ class GUI implements ActionListener  {
         dateFrame.setVisible(true);        
     }
     
-    public void actionPerformed(ActionEvent e){  
+    public void actionPerformed(ActionEvent e){ 
+        //user wants to select a file for a roster 
         if(e.getSource()==i1){
             String path = Roster.openFileChooser(); //open a file chooser and save the selected file's path to path
             ArrayList<Student> studentArr;   //create array list of students
@@ -108,12 +109,14 @@ class GUI implements ActionListener  {
             }
         }
 
-        else if(e.getSource()==i2){ //user wants to add attendance
+        //user wants to add attendance
+        else if(e.getSource()==i2){ 
             //date handling
             datePicker();
         }
 
-        else if(e.getSource()==i3){ //save info
+        //save info
+        else if(e.getSource()==i3){ 
             String path = Roster.openFileChooser(); //get file path to save to
 
             //save file
@@ -124,7 +127,8 @@ class GUI implements ActionListener  {
             }
         }
 
-        else if(e.getSource()==i4){ //user wants to plot data
+        //user wants to plot data
+        else if(e.getSource()==i4){ 
             XYSeries[] series = new XYSeries[table.getColumnCount() - 6];   //create array of all the dates
             int[] data = new int[table.getRowCount()];
 
@@ -142,7 +146,8 @@ class GUI implements ActionListener  {
             plot.setVisible(true);
         }
 
-        else if(e.getSource()==aboutButton){    //about button handler
+        //about button handler
+        else if(e.getSource()==aboutButton){    
             JFrame aboutFrame = new JFrame("About");
             JLabel lblFName = new JLabel("<html>TEAM MEMBERS:<br> Brent Li, Preet Patel, Martin Ople, Andrew Lauricella, Chase Kimball</html>");
             
@@ -155,7 +160,8 @@ class GUI implements ActionListener  {
             aboutFrame.setLocationRelativeTo(null);
         }
 
-        else if(e.getSource() == setButton){    //date picker set
+        //date picker set
+        else if(e.getSource() == setButton){    
             dateFrame.dispose();    //close the date picker
             String newDate = monthList.getSelectedItem() + " " + dayList.getSelectedItem(); //create new date header
             model.addColumn(newDate);   //add column to the table

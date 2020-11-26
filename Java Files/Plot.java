@@ -10,7 +10,6 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-
 class Plot extends JFrame{
 
     //creates the chart
@@ -22,10 +21,10 @@ class Plot extends JFrame{
         }
 
         //create chart
-        JFreeChart chart = ChartFactory.createScatterPlot("Student Attendance",
-                                                          "Percentage of Attendance",
-                                                          "Number of Students",
-                                                          dataset);
+        JFreeChart chart = ChartFactory.createScatterPlot("Student Attendance", //chart name
+                                                          "Percentage of Attendance",   //x-axis
+                                                          "Number of Students", //y-axis
+                                                          dataset); //data
         XYPlot plot = chart.getXYPlot();
      
         //turn off gridlines
