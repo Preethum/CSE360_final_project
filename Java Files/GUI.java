@@ -9,6 +9,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import org.jfree.data.xy.XYSeries;
 
 class GUI implements ActionListener  {
     JFrame frame, dateFrame;
@@ -124,7 +125,19 @@ class GUI implements ActionListener  {
         }
 
         else if(e.getSource()==i4){ //user wants to plot data
-            //TODO
+            XYSeries[] series = new XYSeries[table.getColumnCount() - 6];   //create array of all the dates
+            int[] data = new int[table.getRowCount()];
+
+            for(int col = 6; col < table.getColumnCount(); col++){
+                for(int row = 0; row < table.getRowCount(); row++){
+                    data[row] = (int)table.getValueAt(row, col);
+                }
+                series[col - 6] = Plot.createData(data, table.getColumnName(col));
+            }
+            Plot plot = new Plot(series);
+            plot.setSize(800,400);
+            plot.setLocationRelativeTo(null);
+            plot.setVisible(true);
         }
 
         else if(e.getSource()==aboutButton){    //about button handler
